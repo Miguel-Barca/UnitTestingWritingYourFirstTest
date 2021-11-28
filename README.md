@@ -4,10 +4,10 @@ Getting Started Unit Testing with JUnit 5
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Prerequisites / Requirements](#Prerequisites-/-Requirements)
+* [Prerequisites](#prerequisites)
 
 ## General info
-This repository contains source code examples for the Pluralsight course Getting Started Unit Testing With JUnit5.
+This repository contains source code examples for the [Pluralsight](https://app.pluralsight.com/library/) course [Getting Started Unit Testing With JUnit5](https://www.pluralsight.com/courses/junit-5-unit-testing-getting-started).
 
 ## Technologies
 Project is created with:
@@ -16,6 +16,6 @@ Project is created with:
 * intelliJ IDEA community edition
 	
 
-## Prerequisites / Requirements
+## Prerequisites
 Java 8 or higher is required to compile and run the code.
 
