@@ -30,6 +30,9 @@ public class ClinicMain {
                 return option;
             case "2": performAllAppointments();
                 return option;
+            case "X":
+            case "x":
+                return option;
             default: System.out.println("Invalid option, please re-enter.");
                 return option;
         }
