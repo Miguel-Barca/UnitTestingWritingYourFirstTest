@@ -2,6 +2,7 @@ package patientintake;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class ClinicMain {
@@ -23,6 +24,7 @@ public class ClinicMain {
         System.out.println("Please select an option:");
         System.out.println("1. Enter a Patient Appointment");
         System.out.println("2. View All Appointments");
+        System.out.println("3. View Today's Appointments");
         System.out.println("X.  Exit System.");
         System.out.print("Option: ");
         String option = scanner.next();
@@ -30,6 +32,8 @@ public class ClinicMain {
             case "1": performPatientEntry(scanner);
                 return option;
             case "2": performAllAppointments();
+                return option;
+            case "3": performTodayAppointments();
                 return option;
             case "X":
             case "x":
@@ -72,4 +76,20 @@ public class ClinicMain {
         System.out.println("\n\n");
     }
 
+    private static void performTodayAppointments() throws Throwable {
+        System.out.println("\n\nAppointments for Today:");
+        listAppointments(calendar.getTodayAppointments());
+        System.out.println("\nPress any key to continue...");
+        System.in.read();
+        System.out.println("\n\n");
+    }
+
+    private static void listAppointments(List<PatientAppointment> appointments) {
+        for (PatientAppointment appointment : appointments) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a");
+            String apptTime = formatter.format(appointment.getAppointmentDateTime());
+            System.out.println(String.format("%s:  %s, %s\t\tDoctor: %s", apptTime, appointment.getPatientLastName(),
+                    appointment.getPatientFirstName(), appointment.getDoctor().getName()));
+        }
+    }
 }
