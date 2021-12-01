@@ -65,12 +65,7 @@ public class ClinicMain {
 
     private static void performAllAppointments() throws Throwable {
         System.out.println("\n\nAll Appointments in System:");
-        for (PatientAppointment appointment : calendar.getAppointments()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a");
-            String apptTime = formatter.format(appointment.getAppointmentDateTime());
-            System.out.println(String.format("%s:  %s, %s\t\tDoctor: %s", apptTime, appointment.getPatientLastName(),
-                    appointment.getPatientFirstName(), appointment.getDoctor().getName()));
-        }
+        listAppointments(calendar.getAppointments());
         System.out.println("\nPress any key to continue...");
         System.in.read();
         System.out.println("\n\n");

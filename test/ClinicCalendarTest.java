@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import patientintake.ClinicCalendar;
 import patientintake.Doctor;
 import patientintake.PatientAppointment;
@@ -12,51 +12,51 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClinicCalendarTest {
 
-    @Test
-    public void allowEntryOfAnAppointment() {
-        ClinicCalendar calendar = new ClinicCalendar(LocalDate.now()); // setup code
-        calendar.addAppointment("Jim", "Weaver","avery",
-                "09/01/2018 2:00 pm"); // code that calls the system under test
-        List<PatientAppointment> appointments = calendar.getAppointments();
-        assertNotNull(appointments); //if it were null the assertion would fail and abort execution with a failure message
-        assertEquals(1, appointments.size()); /*Junit most commonly used assertion | the second value is
-        the actual value we got back from the system*/
+    private ClinicCalendar calendar;
 
-        //setup -> execute -> verify with assertions || a common pattern with any type of automated test
+    @BeforeEach
+    void init() {
+        calendar = new ClinicCalendar(LocalDate.of(2018, 8, 26));
+    }
+
+    @Test
+    void allowEntryOfAnAppointment() {
+        calendar.addAppointment("Jim", "Weaver", "avery",
+                "09/01/2018 2:00 pm");
+        List<PatientAppointment> appointments = calendar.getAppointments();
+        assertNotNull(appointments);
+        assertEquals(1, appointments.size());
         PatientAppointment enteredAppt = appointments.get(0);
-        assertEquals("Jim", enteredAppt.getPatientFirstName());
-        assertEquals("Weaver", enteredAppt.getPatientLastName());
-        assertEquals(Doctor.avery, enteredAppt.getDoctor());
-        assertSame(Doctor.avery, enteredAppt.getDoctor()); // assertSame will assert if the two variables
-        // being compared point to the same object in memory
-        assertEquals("9/1/2018 02:00 PM",
-                enteredAppt.getAppointmentDateTime()
-                        .format(DateTimeFormatter.ofPattern("M/d/yyy hh:mm a", Locale.ENGLISH)));
+
+        assertAll(
+                () -> assertEquals("Jim", enteredAppt.getPatientFirstName()),
+                () -> assertEquals("Weaver", enteredAppt.getPatientLastName()),
+                () -> assertSame(Doctor.avery, enteredAppt.getDoctor()),
+                () -> assertEquals("9/1/2018 02:00 PM",
+                        enteredAppt.getAppointmentDateTime().format(DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a", Locale.US)))
+        );
     }
 
     @Test
     void returnTrueForHasAppointmentsIfThereAreAppointments() {
-        ClinicCalendar calendar = new ClinicCalendar(LocalDate.now());
-        calendar.addAppointment("Jim", "Weaver","avery",
+        calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/01/2018 2:00 pm");
-        assertTrue(calendar.hasAppointment(LocalDate.of(2018,9,1)));
+        assertTrue(calendar.hasAppointment(LocalDate.of(2018, 9, 1)));
     }
 
     @Test
     void returnFalseForHasAppointmentsIfThereAreNoAppointments() {
-        ClinicCalendar calendar = new ClinicCalendar(LocalDate.now());
-        assertFalse(calendar.hasAppointment(LocalDate.of(2018,9,1)));
+        assertFalse(calendar.hasAppointment(LocalDate.of(2018, 9, 1)));
     }
 
     @Test
-    void returnCurrentDaysAppointmens() {
-        ClinicCalendar calendar = new ClinicCalendar(LocalDate.now());
+    void returnCurrentDaysAppointments() {
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "08/26/2018 2:00 pm");
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "08/26/2018 3:00 pm");
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/01/2018 2:00 pm");
-        assertEquals(2, calendar.getTodayAppointments().size()); //assertEquals on a collection
+        assertEquals(2, calendar.getTodayAppointments().size());
     }
 }
