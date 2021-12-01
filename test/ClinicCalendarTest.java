@@ -14,13 +14,21 @@ class ClinicCalendarTest {
 
     private ClinicCalendar calendar;
 
+    @BeforeAll
+    static void testClassSetup() {
+        System.out.println("Before all...");
+    }
+
     @BeforeEach
+    // init() is removing repeated code and working as a setup method
     void init() {
+        System.out.println("Before each...");
         calendar = new ClinicCalendar(LocalDate.of(2018, 8, 26));
     }
 
     @Test
     void allowEntryOfAnAppointment() {
+        System.out.println("entry of appointment...");
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/01/2018 2:00 pm");
         List<PatientAppointment> appointments = calendar.getAppointments();
@@ -39,6 +47,7 @@ class ClinicCalendarTest {
 
     @Test
     void returnTrueForHasAppointmentsIfThereAreAppointments() {
+        System.out.println("has appointments...");
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/01/2018 2:00 pm");
         assertTrue(calendar.hasAppointment(LocalDate.of(2018, 9, 1)));
@@ -46,6 +55,7 @@ class ClinicCalendarTest {
 
     @Test
     void returnFalseForHasAppointmentsIfThereAreNoAppointments() {
+        System.out.println("no appointments...");
         assertFalse(calendar.hasAppointment(LocalDate.of(2018, 9, 1)));
     }
 
@@ -59,4 +69,15 @@ class ClinicCalendarTest {
                 "09/01/2018 2:00 pm");
         assertEquals(2, calendar.getTodayAppointments().size());
     }
+
+    @AfterEach
+    void tearDownAfterEach() {
+        System.out.println("after each...");
+    }
+
+    @AfterAll
+    static void testDownAfterAll() {
+        System.out.println("After all...");
+    }
+
 }
