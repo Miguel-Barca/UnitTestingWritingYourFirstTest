@@ -1,3 +1,5 @@
+package patientintake;
+
 import org.junit.jupiter.api.*;
 import patientintake.ClinicCalendar;
 import patientintake.Doctor;
