@@ -1,14 +1,13 @@
 package patientintake;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("dateTime")
 @DisplayName("DateTimeConverter should")
 class DateTimeConverterTest {
 
@@ -82,5 +81,12 @@ class DateTimeConverterTest {
         assertEquals("Unable to create date time from: [09/01/2018 100 pm], " +
                 "please enter with format [M/d/yyyy h:mm a], " +
                 "Text '09/01/2018 100 PM' could not be parsed at index 14", error.getMessage());
+    }
+
+    @Test
+    @DisplayName("A disabled test method")
+    @Disabled
+    void aDisabledTestMethod() {
+        System.out.println("This isn't going to run");
     }
 }
