@@ -16,6 +16,7 @@ public class ClinicCalendar {
         this.today = today;
         this.appointments = new ArrayList<>();
     }
+
     public void addAppointment(String patientFirstName, String patientLastName, String doctorKey,
                                String dateTime) {
         Doctor doc = Doctor.valueOf(doctorKey.toLowerCase());
