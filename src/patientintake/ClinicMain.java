@@ -11,14 +11,19 @@ public class ClinicMain {
     private static ClinicCalendar calendar;
 
     public static void main(String[] args) throws Throwable {
-        calendar = new ClinicCalendar(LocalDate.now());
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to the Patient Intake Computer System!\n\n");
-        String lastOption = "";
-        while (!lastOption.equalsIgnoreCase("x")) {
-            lastOption = displayMenu(scanner);
-        }
-        System.out.println("\nExiting System...\n");
+//        calendar = new ClinicCalendar(LocalDate.now());
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Welcome to the Patient Intake Computer System!\n\n");
+//        String lastOption = "";
+//        while (!lastOption.equalsIgnoreCase("x")) {
+//            lastOption = displayMenu(scanner);
+//        }
+//        System.out.println("\nExiting System...\n");
+
+        int id = 1;
+        System.out.println(++id);
+        System.out.println("------------------------");
+        System.out.println("agora o valor de id é " + id);
     }
 
     private static String displayMenu(Scanner scanner) throws Throwable {
